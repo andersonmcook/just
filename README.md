@@ -50,7 +50,7 @@ Functions
 export default {
   array: () => [],
   false: () => false,
-  not: boolean => !boolean,
+  not: boolean => !boolean, // state => !state
   null: () => null,
   object: () => ({}),
   payload: (_state, action) => action.payload,
