@@ -1,12 +1,12 @@
 Using the createReducer pattern in Redux
-```
+```javascript
 // takes an initial state and an object where each key is a handler function that takes state and action
 const createReducer = (initialState, handlerObj) =>
   (state = initialState, action) =>
     handlerObj.hasOwnProperty(action['type']) ? handlerObj[action['type']](state, action) : state
 ```
 OR
-```
+```javascript
 function createReducer(initialState, handlers) {
   return function reducer(state = initialState, action) {
     if (handlers.hasOwnProperty(action.type)) {
@@ -19,7 +19,7 @@ function createReducer(initialState, handlers) {
 ```
 
 Implementation
-```
+```javascript
 export const someReducer = createReducer(someInitialState, {
   [TYPE_A](state, action) {
     return action.payload
@@ -36,7 +36,7 @@ export const someReducer = createReducer(someInitialState, {
 })
 ```
 becomes
-```
+```javascript
 export const someReducer = createReducer(someInitialState, {
   [TYPE_A]: Just.payload,
   [TYPE_B]: Just.not,
@@ -46,11 +46,11 @@ export const someReducer = createReducer(someInitialState, {
 ```
 
 Functions
-```
+```javascript
 export default {
   array: () => [],
   false: () => false,
-  not: boolean => !boolean,
+  not: boolean => !boolean, // state => !state
   null: () => null,
   object: () => ({}),
   payload: (_state, action) => action.payload,
