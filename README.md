@@ -32,6 +32,12 @@ export const someReducer = createReducer(someInitialState, {
   },
   [TYPE_D](state, action) {
     return {}
+  },
+  [TYPE_E](state, action) {
+    return { ...state, some_key: !state.some_key }
+  },
+  [TYPE_F](state, action) {
+    return action.payload.an_object.a_value
   }
 })
 ```
@@ -41,7 +47,9 @@ export const someReducer = createReducer(someInitialState, {
   [TYPE_A]: Just.payload,
   [TYPE_B]: Just.not,
   [TYPE_C]: Just.return(someInitialState),
-  [TYPE_D]: Just.object
+  [TYPE_D]: Just.object,
+  [TYPE_E]: Just.toggle('some_key'),
+  [TYPE_F]: Just.path(['payload', 'an_object', 'a_value'])
 })
 ```
 
@@ -56,6 +64,7 @@ export default {
   path, // get nested value in action object
   payload: (_state, action) => action.payload,
   return: value => () => value,
+  toggle: key => state => ({...state, [key]: !state[key]}),
   true: () => true,
   zero: () => 0
 }

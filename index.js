@@ -13,6 +13,7 @@ export default {
   path,
   payload: (_state, action) => action.payload,
   return: value => () => value,
+  toggle: key => state => ({...state, [key]: !state[key]}),
   true: () => true,
   zero: () => 0
 }
