@@ -50,12 +50,33 @@ Functions
 export default {
   array: () => [],
   false: () => false,
-  not: boolean => !boolean, // state => !state
+  not: state => !state,
   null: () => null,
   object: () => ({}),
+  path, // get nested value in action object
   payload: (_state, action) => action.payload,
   return: value => () => value,
   true: () => true,
   zero: () => 0
 }
+```
+
+Just.path
+```javascript
+const action = {
+  type: 'SOME_TYPE',
+  payload: {
+    one: {
+      some_value: [],
+      two: {
+        three: {
+          desired_value: 'good'
+        }
+      }
+    }
+  }
+}
+
+//in reducer
+[TYPE_E]: Just.path(['payload', 'one', 'two', 'three', 'desired_value']) // 'good'
 ```
